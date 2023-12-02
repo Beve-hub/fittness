@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "fittness",
-    "slug": "fittness",
+    "name": "gym",
+    "slug": "gym",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
