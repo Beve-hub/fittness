@@ -3,8 +3,10 @@ import React from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { bodyParts } from '../constants';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 
 export default function BodyPart() {
+    const router = useRouter();
   return (
     <View style={styles.first}>
 
@@ -20,34 +22,34 @@ export default function BodyPart() {
        columnWrapperStyle={{
         justifyContent: 'space-around'
        }}
-       renderItem={({item, index})=> <BodyPartCard index={index} item={item}/>}
+       renderItem={({item, index})=> <BodyPartCard router={router} index={index} item={item}/>}
      />
 
     </View>
   )
 }
 
-const BodyPartCard = ({item, index}) =>{
+const BodyPartCard = ({item,router, index}) =>{
     return (
         <View>
             <TouchableOpacity
+            onPress={() => router.push({pathname: '/ Excercises', params:item})}
             style={styles.bag} >
-                 <Image
+             <Image
              source={item.image}
              resizeMode='cover'
              style={styles.tur}
 
             />
            
-           <LinearGradient
-            colors={['transparent', 'rgba(0,0,0.9)']}
-            style={styles.pen}
-            start={{x: 0.5, y:0}}
-            end={{x: 0.5, y: 1}}
-           />
-            <Text style={styles.text}>
-                {item?.name}
-            </Text>
+                 <LinearGradient
+                   style={styles.pen}
+                  start={{x: 0.5, y:0}}
+                  end={{x: 0.5, y: 1}}
+                 />
+                <Text style={styles.text}>
+                    {item?.name}
+                </Text>
              </TouchableOpacity>
         </View>
     )
@@ -80,5 +82,11 @@ const styles = StyleSheet.create({
         display: 'absolute',
         bottom: 50,
         borderRadius: 40,
+        colors: ['transparent','rgba(0,0,0.9)']
+    },
+    text: {
+        fontSize: hp(2.3),
+        color:'white',
+        fontWeight: 'semibold'
     }
 })
